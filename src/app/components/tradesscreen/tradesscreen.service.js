@@ -15,18 +15,16 @@
       };
 
       function getListings(params) {
-
         var pagination = params.pagination;
-        var start = params.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
-        var number = params.number || 10;  // Number of entries showed per page.
+        var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+        var number = pagination.number || 10;  // Number of entries showed per page.
 
 
         var url = apiHost + '/listings?start='+ start +'&limit=' + number;
 
         if (params.sort.predicate){
-          console.log("sort params: %O", params.sort);
+          url = url + '&orderBy='+params.sort.predicate +'&reverse='+params.sort.reverse ;
         }
-
 
         return $http.get(url)
           .then(getListingsComplete)

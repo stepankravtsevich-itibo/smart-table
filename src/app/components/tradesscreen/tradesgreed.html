@@ -1,13 +1,13 @@
 <table class="table" st-pipe="vm.callServer" st-table="vm.displayed">
   <thead>
     <tr ng-show="!mc.isLoading">
-      <th></th>
+      <th><st-select-all all="vm.displayed"></st-select-all></th>
       <th st-sort="{{column.name}}" ng-repeat="column in vm.table_columns">{{column.label}}</th> <!--  st-sort="{{column.name}}"  -->
     </tr>
   </thead>
   <tbody ng-show="!vm.isLoading">
     <tr ng-repeat="row in vm.displayed">
-      <td></td>
+      <td cs-select="row"></td>
       <td ng-repeat="column in vm.table_columns">{{row[column.name] }}</td>
     </tr>
   </tbody>

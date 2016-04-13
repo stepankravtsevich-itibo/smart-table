@@ -96,8 +96,13 @@ angular.module('APIMocks', [])
             // oops
           }
 
-          // var result = TagRepo.data.slice(urlParams.start, urlParams.limit);
-          var result = $filter('limitTo')(TagRepo.data, urlParams.limit, urlParams.start);
+          var result = TagRepo.data.slice(0);
+          if(urlParams.orderBy){
+            result = $filter('orderBy')(result, function(_sorted_object){
+              return _sorted_object[urlParams.orderBy].value
+            } , urlParams.reverse === "true" ? true : false);
+          }
+           result = $filter('limitTo')(result, urlParams.limit, urlParams.start);
 
           $log.log('Intercepted GET to listings', data);
 
