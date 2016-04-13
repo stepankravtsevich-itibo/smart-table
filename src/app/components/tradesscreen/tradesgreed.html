@@ -1,0 +1,26 @@
+<table class="table" st-pipe="vm.callServer" st-table="vm.displayed">
+  <thead>
+    <tr ng-show="!mc.isLoading">
+      <th></th>
+      <th st-sort="{{column.name}}" ng-repeat="column in vm.table_columns">{{column.label}}</th> <!--  st-sort="{{column.name}}"  -->
+    </tr>
+  </thead>
+  <tbody ng-show="!vm.isLoading">
+    <tr ng-repeat="row in vm.displayed">
+      <td></td>
+      <td ng-repeat="column in vm.table_columns">{{row[column.name] }}</td>
+    </tr>
+  </tbody>
+  <tbody ng-show="vm.isLoading">
+    <tr>
+      <td colspan="{{vm.table_columns.length +1}}" class="text-center">Loading ... </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="text-center" colspan="{{vm.table_columns.length +1}}">
+        <div st-pagination="" st-items-by-page="vm.itemsBuPage"></div>
+      </td>
+    </tr>
+  </tfoot>
+</table>
