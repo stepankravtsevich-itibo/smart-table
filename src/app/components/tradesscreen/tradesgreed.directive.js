@@ -4,8 +4,10 @@
   angular
     .module('tradesscreen')
     .directive('tradesGreed', tradesGreed)
+    .directive('advancedFilters', advancedFilters)
     .directive('csSelect', csSelect)
-    .directive('stSelectAll', stSelectAll);
+    .directive('stSelectAll', stSelectAll)
+    .directive('advancedFilterItem', advancedFilterItem);
 
     function tradesGreed() {
       return {
@@ -74,6 +76,23 @@
       }
     }
 
+    function advancedFilters(){
+      return {
+        templateUrl: 'app/components/tradesscreen/advancedFilters.html',
+        scope: {},
+        controller: advancedFiltersController,
+        controllerAs: 'vm',
+        bindToController: true
+      };
+
+      /** @ngInject */
+      function advancedFiltersController() {
+        this.advanced_filters = [
+          {name: "advanced_filter_item_shape", label: "Shape", type: 'select', values: ['Round', 'Square']}
+        ];
+      }
+    }
+
     function csSelect() {
         return {
             require: ['^stTable', '^^tradesGreed'],
@@ -132,6 +151,28 @@
             scope.isAllSelected = false;
           });
         }
+      }
+    }
+
+    function advancedFilterItem(){
+      return {
+        restrict: 'E',
+        templateUrl: 'app/components/tradesscreen/advancedFilterItem.html',
+        scope: {
+          itemName: "@",
+          itemLabel: "@",
+          itemData: "&",
+          itemDataType: "@"
+        },
+        link: function () {},
+        controller: advancedFilterItemController,
+        controllerAs: 'vm',
+        bindToController: true
+      }
+
+      /** @ngInject */
+      function advancedFilterItemController(){
+        console.log(this);
       }
     }
 })();

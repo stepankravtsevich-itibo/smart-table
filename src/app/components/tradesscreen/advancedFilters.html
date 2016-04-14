@@ -1,0 +1,142 @@
+<input type="checkbox" class="toggleFilterMenuInput" id="filterMenu"/>
+<label class="toggleFilterMenu" for="filterMenu">
+    <span class="closed">Filters </span>
+    <span class="filtersIcon"><span class="hamburger"></span></span>
+</label>
+<aside class="filterMenu">
+    <div class="scrollbar" scrollbar>
+        <form type="post">
+            <ul>
+                <li class="filterItem">
+                    <span class="itemName">All Filters</span>
+                    <button type="button" class="restBtn">Reset</button>
+                </li>
+
+
+                <!-- <filter>
+                   <filter-item
+                   item-name="lab"
+                   item-data="variable or function that invokes data from backend"
+                   item-data-type="number|currency|select|text|date|range|date range">
+                   </filter-item>
+                </filter> -->
+
+                <advanced-filter-item
+                    item-name="{{filter.name}}"
+                    item-label="{{filter.label}}"
+                    item-data=""
+                    item-data-type="{{filter.type}}"
+                    ng-repeat="filter in vm.advanced_filters">
+                </advanced-filter-item>
+
+<hr>
+
+
+                <!--shape -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="Shape" />
+                    <label class="filterTitleLabel" for="Shape">
+                        Shape
+                    </label>
+                    <ui-select ng-model="shape.selected" theme="selectize" ng-disabled="disabled">
+                        <ui-select-match placeholder="Select Shape">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="shape in shapes | filter: $select.search">
+                          <!-- <span ng-bind-html="shape.name | highlight: $select.search"></span> -->
+                        </ui-select-choices>
+                    </ui-select>
+                </li>
+                <!-- size -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="Size"/>
+                    <label class="filterTitleLabel" for="Size">Size</label>
+                    <!-- Multiselect -->
+                    <div ng-dropdown-multiselect="" options="sizeFilterData" selected-model="selectedSizeFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts" events="sizeMultiselectEvents"></div>
+                    <div class="form-field specific">
+                        <div>
+                            <input type="text" class="regularInput"> <input type="text" class="regularInput">
+                        </div>
+                    </div>
+                </li>
+                <!--color -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="Color"/>
+                    <label class="filterTitleLabel" for="Color">
+                        Color
+                    </label>
+                     <!-- Multiselect -->
+                    <div ng-dropdown-multiselect="" options="colorFilterData" selected-model="selectedColorFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                <!--Clarity -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="Clarity"/>
+                    <label class="filterTitleLabel" for="Clarity">
+                        Clarity
+                    </label>
+                     <!-- Multiselect -->
+                    <div ng-dropdown-multiselect="" options="clarityFilterData" selected-model="selectedClarityFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                <!-- Fancy Color -->
+                <li class="filterItem options">
+                    <input class="filterTitle" type="checkbox" id="fancyColor" />
+                    <label class="filterTitleLabel" for="fancyColor">Fancy Color</label>
+                     <!-- Multiselect -->
+                    <div ng-dropdown-multiselect="" options="fancyColorFilterData" selected-model="selectedFancyColorFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                <!-- Price -->
+                <li class="filterItem selected">
+                    <input class="filterTitle" type="checkbox" id="price" />
+                    <label class="filterTitleLabel" for="price">Price</label>
+                    <!-- Multiselect -->
+                     <div ng-dropdown-multiselect="" options="priceFilterData" selected-model="selectedPriceFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                <!-- Cash Price -->
+                <li class="filterItem selected">
+                    <input class="filterTitle" type="checkbox" id="cashPrice" />
+                    <label class="filterTitleLabel" for="cashPrice">Cash Price</label>
+                    <!-- Multiselect -->
+                     <div ng-dropdown-multiselect="" options="cashPriceFilterData" selected-model="selectedCashPriceFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                 <!-- Stock # -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="stockNumber"/>
+                    <label class="filterTitleLabel" for="stockNumber">Stock #</label>
+                    <div class="form-field">
+                        <input type="text" class="regularInput">
+                    </div>
+                </li>
+                <!-- Lab-->
+                <li class="filterItem selected">
+                    <input class="filterTitle" type="checkbox" id="lab" />
+                    <label class="filterTitleLabel" for="lab">Lab</label>
+                    <!-- Multiselect -->
+                     <div ng-dropdown-multiselect="" options="labFilterData" selected-model="selectedLabFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                 <!-- Certificate # -->
+                <li class="filterItem">
+                    <input class="filterTitle" type="checkbox" id="certificateNumber"/>
+                    <label class="filterTitleLabel" for="certificateNumber">Certificate #</label>
+                    <div class="form-field">
+                        <input type="text" class="regularInput">
+                    </div>
+                </li>
+                 <!-- Cert Images-->
+                <li class="filterItem selected">
+                    <input class="filterTitle" type="checkbox" id="certImages" />
+                    <label class="filterTitleLabel" for="certImages">Cert Images</label>
+                    <!-- Multiselect -->
+                     <div ng-dropdown-multiselect="" options="certImagesFilterData" selected-model="selectedCertImagesFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+                 <!-- Images-->
+                <li class="filterItem selected">
+                    <input class="filterTitle" type="checkbox" id="images" />
+                    <label class="filterTitleLabel" for="images">Images</label>
+                    <!-- Multiselect -->
+                     <div ng-dropdown-multiselect="" options="imagesFilterData" selected-model="selectedImagesFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+                </li>
+            </ul>
+
+        </form>
+        <button class="applyBtn" type="button" ng-click="applyFilters()">Apply</button>
+    </div>
+
+</aside>

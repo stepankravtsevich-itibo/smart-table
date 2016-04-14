@@ -1,0 +1,8 @@
+<li class="filterItem">
+    <input class="filterTitle" type="checkbox" id="{{vm.itemName}}"/>
+    <label class="filterTitleLabel" for="{{vm.itemName}}">
+        {{vm.itemLabel}}
+    </label>
+     <!-- Multiselect -->
+    <div ng-dropdown-multiselect="" options="clarityFilterData" selected-model="selectedClarityFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+</li>
