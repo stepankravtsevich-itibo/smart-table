@@ -8,24 +8,29 @@
     .directive('stSelectAll', stSelectAll);
 
     function tradesGreed() {
-      var directive = {
-        restrict: 'E',
+      return {
         templateUrl: 'app/components/tradesscreen/tradesgreed.html',
         scope: {
-            gridOptions: '='
+            startFrom: '=',
+            itemsNumber: '=',
+            rowsSelected: '='
         },
         controller: tradesGreedController,
         controllerAs: 'vm',
         bindToController: true
       };
 
-      return directive;
-
       /** @ngInject */
-      function tradesGreedController(tradesScreenService, $filter, $scope) {
+      function tradesGreedController($scope, tradesScreenService, $filter) {
         var self = this;
-        this.itemsBuPage = 10;
+        this.itemsByPage = 10;
         this.displayed = [];
+
+        this.updateSelected = function(){
+          self.rowsSelected = self.displayed.filter(function(item){
+            return item.isSelected === true;
+          });
+        }
 
         this.callServer = function (table_params){
           self.isLoading = true;
@@ -35,6 +40,10 @@
               function(result){
                 self.table_columns = [];
                 self.displayed = [];
+
+                self.startFrom = table_params.pagination.start;
+                self.itemsNumber = table_params.pagination.number;
+
                 angular.forEach(Object.keys(result.data[0]), function(field_name){
                   self.table_columns.push({name: field_name, label: result.data[0][field_name]['label']})
                 })
@@ -67,15 +76,18 @@
 
     function csSelect() {
         return {
-            require: '^stTable',
+            require: ['^stTable', '^^tradesGreed'],
             template: '<input type="checkbox" ng-model="checked"/>',
             scope: {
                 row: '=csSelect'
             },
-            link: function (scope, element, attr, table_ctrl) {
+            link: function (scope, element, attr, controllers) {
+              var table_ctrl = controllers[0],
+                  trade_screen_ctrl = controllers[1];
+
               element.bind('change', function (evt) {
                   scope.$apply(function () {
-                      table_ctrl.select(scope.row, 'multiple');
+                    table_ctrl.select(scope.row, 'multiple');
                   });
               });
 
@@ -87,6 +99,8 @@
                   element.parent().removeClass('st-selected');
                   scope.checked = false;
                 }
+
+                trade_screen_ctrl.updateSelected();
               });
             }
         };

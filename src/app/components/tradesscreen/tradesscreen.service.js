@@ -31,7 +31,6 @@
           .catch(getListingsFailed);
 
         function getListingsComplete(response) {
-          console.log(response);
           return response.data;
         }
 

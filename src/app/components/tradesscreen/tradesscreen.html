@@ -4,9 +4,86 @@
     <acme-navbar creation-date="main.creationDate"></acme-navbar>
   </div>
 
-  <div>
-    <h1>Manage my listings</h1>
-    <trades-greed></trades-greed>
-  </div>
+  <header>
+    <div class="dashboardPageHeader container-fluid pageHeaderWrapper">
+        <h1 class="pageHeader">Manage my listings
 
+            <!-- <ul class="filters headerActionsTabs">
+                <li class="toggleDropdown">
+                    <input type="checkbox" class="toggle" id="showOnly">
+                    <label for="showOnly">Show Only</label>
+                    <span class="caretUp"></span>
+
+                    <ul class="toggleMenu">
+                        <li><a href="#">John</a></li>
+                        <li><a href="#">Mery</a></li>
+                        <li><a href="#">David</a></li>
+                    </ul>
+                </li>
+                <li class="toggleDropdown">
+                    <input type="checkbox" class="toggle" id="sortBy">
+                    <label for="sortBy">Sort By </label>
+                    <span class="caretUp"></span>
+                    <ul class="toggleMenu">
+                        <li><a href="#">John</a></li>
+                        <li><a href="#">Mery</a></li>
+                        <li><a href="#">David</a></li>
+                    </ul>
+                </li>
+                <li >
+                    <button type="button" class="restBtn">Reset Filters</button>
+                </li>
+            </ul> -->
+        </h1>
+    </div>
+  </header>
+
+  <main class="main container-fluid tab-content">
+    <div class="subheader">
+        <div class="checkboxActions clearfix">
+            <ul class="totalAmount headerActionsTabs" ng-hide="vm.isChecked()">
+                <li>{{items_number}} Listings</li>
+                <li>Showing {{start_from}} -{{start_from + items_number}}</li>
+                <li>Filters: </li>
+            </ul>
+            <ul class="headerActionsTabs actions" ng-show="vm.isChecked()">
+                <li><button type="button">Remove</button> </li>
+                <li><button type="button">Show Selected</button> </li>
+                <li><button type="button">Email</button> </li>
+                <li><button type="button">Print</button> </li>
+            </ul>
+        </div>
+        <div class="listingBtns">
+            <button type="button" class="transparentButton">Export All</button>
+            <button type="button" class="regularButton">Update</button>
+        </div>
+        <!-- <ul class="selectedFilters">
+            <li >
+                <div class="selectedFilter">
+                    <span class="filterName">
+                        <button class="closeBtn"></button>
+                        Finish
+                    </span>
+                    <span class="selectedValue">3X</span>
+                </div>
+            </li>
+            <li>
+                <div class="selectedFilter">
+                     <span class="filterName">
+                        <button class="closeBtn"></button>
+                        Lab
+                    </span>
+                    <span class="selectedValue">GIA</span>
+                </div>
+            </li>
+        </ul> -->
+    </div>
+    <article class="inquiriesTable" id="inquiriesTable">
+      <trades-greed
+          start-from="start_from"
+          items-number="items_number"
+          rows-selected="rows_selected">
+      </trades-greed>
+    </article>
+  </main>
 </div>
