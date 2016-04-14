@@ -3,12 +3,13 @@
 
   angular
     .module('tradesscreen')
-    .factory('tradesScreenService', tradesScreenService);
+    .constant('APIHost', 'http://some-awesome-backand:3000/api')
+    .factory('tradesScreenService', tradesScreenService)
+    .factory('FiltersService', FiltersService);
 
 
     /** @ngInject */
-    function tradesScreenService($log, $http) {
-      var apiHost = 'http://some-awesome-backand:3000/api';
+    function tradesScreenService($log, $http, $resource, APIHost) {
 
       return {
         getListings: getListings
@@ -20,7 +21,7 @@
         var number = pagination.number || 10;  // Number of entries showed per page.
 
 
-        var url = apiHost + '/listings?start='+ start +'&limit=' + number;
+        var url = APIHost + '/listings?start='+ start +'&limit=' + number;
 
         if (params.sort.predicate){
           url = url + '&orderBy='+params.sort.predicate +'&reverse='+params.sort.reverse ;
@@ -39,4 +40,11 @@
         }
       };
   }
+
+
+  /** @ngInject */
+  function FiltersService($resource, APIHost){
+    return $resource(APIHost + '/filters/:name');
+  }
+
 })();

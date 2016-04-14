@@ -23,13 +23,13 @@
 
                 <advanced-filter-item
                     item-name="{{filter.name}}"
-                    item-label="{{filter.label}}"
-                    item-data=""
+                    item-label="{{filter.name}}"
+                    item-data="filter.values"
                     item-data-type="{{filter.type}}"
                     ng-repeat="filter in vm.advanced_filters">
                 </advanced-filter-item>
 
-<hr>
+                <hr>
 
 
                 <!--shape -->

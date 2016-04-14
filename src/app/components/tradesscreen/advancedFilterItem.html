@@ -4,5 +4,5 @@
         {{vm.itemLabel}}
     </label>
      <!-- Multiselect -->
-    <div ng-dropdown-multiselect="" options="clarityFilterData" selected-model="selectedClarityFilter" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+    <div ng-dropdown-multiselect="" options="vm.itemData" selected-model="{{vm.itemName}}" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
 </li>
