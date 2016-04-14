@@ -22,11 +22,10 @@
       return directive;
 
       /** @ngInject */
-      function tradesGreedController(tradesScreenService, $filter) {
+      function tradesGreedController(tradesScreenService, $filter, $scope) {
         var self = this;
         this.itemsBuPage = 10;
         this.displayed = [];
-
 
         this.callServer = function (table_params){
           self.isLoading = true;
@@ -66,30 +65,29 @@
       }
     }
 
-
-
     function csSelect() {
         return {
             require: '^stTable',
-            template: '<input type="checkbox"/>',
+            template: '<input type="checkbox" ng-model="checked"/>',
             scope: {
                 row: '=csSelect'
             },
-            link: function (scope, element, attr, ctrl) {
+            link: function (scope, element, attr, table_ctrl) {
+              element.bind('change', function (evt) {
+                  scope.$apply(function () {
+                      table_ctrl.select(scope.row, 'multiple');
+                  });
+              });
 
-                element.bind('change', function (evt) {
-                    scope.$apply(function () {
-                        ctrl.select(scope.row, 'multiple');
-                    });
-                });
-
-                scope.$watch('row.isSelected', function (newValue, oldValue) {
-                    if (newValue === true) {
-                        element.parent().addClass('st-selected');
-                    } else {
-                        element.parent().removeClass('st-selected');
-                    }
-                });
+              scope.$watch('row.isSelected', function (newValue, oldValue) {
+                if (newValue === true) {
+                  element.parent().addClass('st-selected');
+                  scope.checked = true;
+                } else {
+                  element.parent().removeClass('st-selected');
+                  scope.checked = false;
+                }
+              });
             }
         };
     }
@@ -110,6 +108,7 @@
           });
 
           scope.$watch('all', function (newVal, oldVal) {
+
             if (oldVal) {
               oldVal.forEach(function (val) {
                 val.isSelected = false;

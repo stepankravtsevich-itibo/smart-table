@@ -13,11 +13,8 @@
       .state('tradesscreen', {
         url: '/tradesscreen',
         templateUrl: 'app/components/tradesscreen/tradesscreen.html',
-        controller: tradesScreenCtrl,
+        controller: function(){},
         controllerAs: 'vm'
       });
   }
-
-  /** @ngInject */
-  function tradesScreenCtrl(){}
 })();
