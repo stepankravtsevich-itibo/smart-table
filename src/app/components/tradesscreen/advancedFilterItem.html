@@ -3,6 +3,12 @@
     <label class="filterTitleLabel" for="{{vm.itemName}}">
         {{vm.itemLabel}}
     </label>
-     <!-- Multiselect -->
-    <div ng-dropdown-multiselect="" options="vm.itemData" selected-model="{{vm.itemName}}" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+    <div ng-switch="inputType" ng-repeat="inputType in vm.itemDataType">
+
+      <div ng-switch-when="select" ng-dropdown-multiselect="" options="vm.itemData" selected-model="{{vm.itemName}}" extra-settings="defaultMultiselectSettings" translation-texts="defaultMultiselectTexts"></div>
+      <div ng-switch-when="range">
+        <input /> <input />
+      </div>
+      <div ng-switch-default><input /></div>
+    </div>
 </li>
